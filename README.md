@@ -21,7 +21,60 @@ A operação do varejo enfrentava riscos constantes de desabastecimento sem uma 
 4. **Qual é o impacto financeiro do risco de desabastecimento nos SKUs de maior faturamento?**
 
 ---
+---
 
+## 📊 Visualização do Dashboard & Análises
+
+![Dashboard de Gestão de Inventário](dashboard.png)
+
+> **Destaques do Painel Executivo:**
+> * **KPIs Globais:** Monitoramento em tempo real de Faturamento ($495Mi), Volume Vendido (10Mi un.), Cobertura Média (7,14 dias) e % de Risco de Ruptura (49,68%).
+> * **Faturamento por Categoria:** Identificação dos vetores de receita com liderança de *Furniture* e *Groceries* (~$100Mi cada).
+> * **Tendência Temporal de Vendas:** Acompanhamento da sazonalidade e volumes mensais (~400k a 440k un./mês).
+> * **Matriz de Status de Estoque:** Mapeamento visual indicando que 74,75% do volume negociado opera em faixas de atenção/crítica de reposição.
+
+
+## 🔍 Análises de Negócio & Insights Estratégicos
+
+### 1. Análise de Causa Raiz: Falha Logística vs. Volatilidade Promocional
+* **Diagnóstico:** Havia a suspeita inicial de que o alto risco de ruptura (49,68%) fosse causado por picos imprevisíveis de demanda em dias promocionais ou feriados (`Holiday/Promotion`).
+* **Constatação:** A análise revelou que a média de vendas em dias sem promoção é de **136,50 un.** e em dias com promoção é de **136,42 un.** (praticamente idênticas). A taxa de risco crítico também se manteve idêntica (**49,75% vs. 49,61%**).
+* **Conclusão:** A causa raiz do desabastecimento é um **déficit estrutural na política de compras**: os lotes médios de reposição (`Units Ordered` = 110 un.) cobrem apenas **80,8% da demanda média diária** (136 un.), gerando sangria contínua no estoque de segurança.
+
+---
+
+### 2. Análise da Curva A: Exposição Financeira nos SKUs de Maior Faturamento
+* **Diagnóstico:** Avaliação do impacto do desabastecimento nos produtos de maior relevância financeira para a empresa.
+* **Constatação:** Os 10 principais SKUs em receita representam mais de **$53 Milhões em faturamento**, porém todos operam em estado crítico de estoque em **mais de 50% dos dias analisados**.
+* **Destaque Crítico:** O produto líder de vendas (`P0014 - Toys`, receita de $5,51M) permaneceu **406 dias em nível crítico de estoque (53,42% do tempo)**, gerando altíssimo risco de custo de oportunidade por falta de produto (*Out-of-Stock*).
+
+---
+
+### 3. Análise Geográfica e por Loja: Risco Sistêmico na Cadeia de Suprimentos
+* **Diagnóstico:** Verificação se o problema de ruptura estava concentrado em alguma região específica ou se era isolado em determinadas unidades.
+* **Constatação:** Todas as 5 lojas apresentaram volume de vendas homogêneo (~$24M a $25.9M por combinação regional) e um percentual de risco de ruptura consistente, variando estritamente na faixa de **48% a 51%**.
+* **Conclusão:** O problema não é uma falha operacional local de uma loja específica, mas sim um **problema sistêmico na Gestão do Centro de Distribuição (CD)** e no cálculo do Ponto de Pedido (*Reorder Point*) para toda a rede.
+
+---
+
+### 4. Análise do Modelo de Previsão de Demanda (Demand Forecast)
+* **Diagnóstico:** Avaliação da acurácia e sanidade dos dados de previsão que alimentavam o setor de planejamento de compras.
+* **Constatação:** No processo de ETL (Python), foram identificados 673 registros (0,92%) com valores **negativos no forecast**, além de um erro médio consistente (`Forecast Error` ~ -5,06 unidades).
+* **Conclusão:** O algoritmo legado de *Demand Forecast* está subestimando a demanda real, fazendo com que o time de compras emita pedidos menores do que o necessário para suprir o volume de vendas diário.
+
+---
+> 💡 **Impacto no Negócio: Por que operar com 74,75% em Risco Crítico afeta a Lucratividade real?**
+>
+> Embora o faturamento bruto atinja **$495M**, operar no limite da ruptura esconde perdas financeiras silenciosas:
+> 
+> 1. **Custo do "Lucro Invisível" Perdido (*Out-of-Stock Cost*):**
+>    Com 74,75% dos itens operando com $\le 2$ dias de cobertura, qualquer atraso logístico gera prateleiras vazias. Se o cliente não encontra o produto líder (ex: `P0014`), ele compra no concorrente. Estima-se que a receita poderia superar **$550M** apenas garantindo a disponibilidade dos SKUs de Curva A na gôndola.
+>
+> 2. **Destruição da Margem por Fretes Emergenciais:**
+>    Para combater o risco iminente de desabastecimento, o time de Supply Chain é forçado a acionar fretes fracionados/expressos e horas extras no Centro de Distribuição. O aumento do custo operacional (OPEX) devora a margem de lucro líquido da empresa.
+>
+> 3. **Perda de LTV (*Lifetime Value*) e Imagem de Marca:**
+>    Encontrar prateleiras vazias de forma recorrente destrói a fidelidade do consumidor. Como a aquisição de novos clientes no varejo custa de **5 a 7 vezes mais** do que a retenção, a ruptura crônica afeta diretamente o valor do cliente no longo prazo.
 ## 🔬 Metodologia e Pipeline de Dados
 
 ```
