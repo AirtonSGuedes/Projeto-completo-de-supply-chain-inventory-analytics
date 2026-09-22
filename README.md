@@ -5,6 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Gemini AI](https://img.shields.io/badge/Gemini_AI-8E75B5?style=for-the-badge&logo=googlegemini&logoColor=white)
 
 ## 📌 Resumo Executivo
 Este projeto desenvolve uma solução ponta a ponta (*End-to-End*) de **Inteligência de Suprimentos e Gestão de Inventário** para uma rede varejista multicanal (5 lojas, 20 SKUs em 5 categorias e 4 regiões). 
@@ -20,8 +21,14 @@ A operação do varejo enfrentava riscos constantes de desabastecimento sem uma 
 3. **A falha é operacional/logística (reposição insuficiente) ou mercadológica (picos imprevisíveis de demanda)?**
 4. **Qual é o impacto financeiro do risco de desabastecimento nos SKUs de maior faturamento?**
 
----
----
+
+## 🛠️ Tecnologias e Ferramentas
+
+* **Engenharia & Análise de Dados:** Python (Pandas, Kaggle API), SQL (SQLite, Views)
+* **Visualização & Modelagem:** Power BI (DAX, Modelo Star Schema, dCalendario)
+* **Suporte & Produtividade:** **Gemini (Google AI)** — Utilizado como assistente de inteligência artificial (*AI Copilot*) no refinamento de scripts Python/SQL, revisão estrutural da documentação e validação das hipóteses de negócio de Supply Chain.
+* **Versionamento:** Git & GitHub
+
 
 ## 📊 Visualização do Dashboard & Análises
 
