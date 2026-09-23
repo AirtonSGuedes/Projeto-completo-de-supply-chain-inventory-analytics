@@ -93,25 +93,17 @@ A operação do varejo enfrentava riscos constantes de desabastecimento sem uma 
 └────────────────────────────────┘     └────────────────────────────────┘     └────────────────────────────────┘
 ``` 
 ## 1. Processamento e Sanitização de Dados (Python)
-- Tratamento de Anomalias: Identificação e ajuste de 673 registros (0,92%) que apresentavam valores negativos no modelo original de Demand Forecast, corrigidos para 0 para evitar distorção no cálculo de erro.
-
-- Engenharia de Métricas (Feature Engineering):
-
-- Revenue (Faturamento): Units Sold * Price
-
-- Days of Inventory (Dias de Cobertura): Inventory Level / Units Sold
-
-- Forecast Error (Erro de Previsão): Units Sold - Demand Forecast
-
-- Stock Status (Categorização Operacional):
-
-- rítico (Risco Ruptura): <= 2 dias de estoque.
-
-- tenção (Estoque Baixo): > 2 e <= 5 dias de estoque.
-
-- Equilibrado: > 5 e <= 10 dias de estoque.
-
-- Excesso: > 10 dias de estoque.
+- **Fonte dos Dados:** Dataset extraído diretamente do Kaggle: [Retail Store Inventory Forecasting Dataset](https://www.kaggle.com/datasets/anirudhchauhan/retail-store-inventory-forecasting-dataset). A extração foi automatizada em Python via API utilizando a biblioteca `kagglehub`.
+- **Tratamento de Anomalias:** Identificação e ajuste de 673 registros (0,92%) que apresentavam valores negativos no modelo original de *Demand Forecast*, corrigidos para 0 para evitar distorções no cálculo de erro.
+- **Engenharia de Métricas (Feature Engineering):**
+  - **Revenue (Faturamento):** `Units Sold * Price`
+  - **Days of Inventory (Dias de Cobertura):** `Inventory Level / Units Sold`
+  - **Forecast Error (Erro de Previsão):** `Units Sold - Demand Forecast`
+  - **Stock Status (Categorização Operacional):**
+    - `Crítico (Risco Ruptura)`: <= 2 dias de estoque.
+    - `Atenção (Estoque Baixo)`: > 2 e <= 5 dias de estoque.
+    - `Equilibrado`: > 5 e <= 10 dias de estoque.
+    - `Excesso`: > 10 dias de estoque.
 
 ## 2. Engenharia de Dados & Consultas Estruturadas (SQL / SQLite)
 - Povoamento da tabela tb_inventory no banco SQLite (supply_chain.db).
